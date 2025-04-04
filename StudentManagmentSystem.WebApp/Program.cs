@@ -8,8 +8,10 @@ using StudentManagmentSystem.WebApp.Repository.Implementation;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
 builder.Services.AddControllersWithViews();
-builder.Services.AddDbContext<StudentManagmentContext>(options => options.UseSqlServer());
+builder.Services.AddDbContext<StudentManagmentContext>(
+    options => options.UseSqlServer(builder.Configuration.GetConnectionString("StudentMS")));
 builder.Services.AddScoped<IApplicationUserService,ApplicationUserService>();
 builder.Services.AddScoped<IDepartmentService, DepartmentService>();
 builder.Services.AddScoped(typeof(IBaseRepository<>),typeof(BaseRepository<>));
