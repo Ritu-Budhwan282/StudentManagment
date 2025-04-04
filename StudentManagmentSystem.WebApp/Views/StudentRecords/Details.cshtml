@@ -1,0 +1,23 @@
+﻿@model StudentManagmentSystem.WebApp.Models.StudentRecordModel;
+
+<h2>Student Details</h2>
+<table class="table">
+    <tr>
+        <th>Roll No.</th>
+        <td>@Model.RollNo</td>
+    </tr>
+    <tr>
+        <th>Name</th>
+        <td>@Model.Name</td>
+    </tr>
+    <tr>
+        <th>Date of Birth</th>
+        <td>@Model.DateOfBirth.ToShortDateString()</td>
+    </tr>
+    <tr>
+        <th>Email</th>
+        <td>@Model.Email</td>
+    </tr>
+</table>
+<a asp-action="CreateUpdate" asp-route-id="@Model.RollNo">Edit</a> |
+<a asp-action="Index">Back to List</a>

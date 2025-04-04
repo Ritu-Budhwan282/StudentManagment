@@ -1,0 +1,82 @@
+﻿
+body {
+    background-color: #f5f5dc; /* Beige background */
+    color: #5a3e1b; /* Dark brown text */
+}
+
+
+
+.table {
+    background-color: #eae0c8; /* Light beige */
+    border-color: #8b5e3b; /* Brown borders */
+}
+
+    .table th {
+        background-color: #8b5e3b; /* Dark brown header */
+        color: #fff; /* White text */
+    }
+
+    .table td {
+        background-color: #f5f5dc; /* Beige */
+    }
+
+.btn-success {
+    background-color: #8b5e3b; /* Brown */
+    border-color: #6d4c30;
+    color: #fff;
+}
+
+    .btn-success:hover {
+        background-color: #6d4c30;
+    }
+
+.btn-primary {
+    background-color: #8b5e3c;
+    border: none;
+    padding: 10px 15px;
+    margin: 5px;
+}
+
+    .btn-primary:hover {
+        background-color: #6b4025;
+    }
+
+.btn-secondary {
+    background-color: #d2b48c;
+    border: none;
+}
+
+.btn-danger {
+    background-color: #a52a2a;
+}
+
+
+
+
+
+.modal-content {
+    background-color: #eae0c8;
+    border-color: #8b5e3b;
+}
+
+.modal-header, .modal-footer {
+    background-color: #8b5e3b;
+    color: #fff;
+}
+
+.alert-info {
+    background-color: #e3caa6; /* Soft beige */
+    color: #5a3e1b;
+}
+
+label {
+    font-weight: bold;
+}
+
+input {
+    background-color: #fff8e7; /* Light beige input fields */
+    border: 1px solid #8b5e3b;
+    padding: 5px;
+}
+
+

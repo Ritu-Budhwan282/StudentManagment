@@ -1,0 +1,41 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    int count = 1;
+}
+@model List<StudentManagmentSystem.WebApp.Models.StudentRecordModel>;
+
+<h2>Student List</h2>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Roll No.</th>
+            <th>Name</th>
+            <th>Date of Birth</th>
+            <th>Email</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var student in Model)
+        {
+            <tr>
+                <td>@count</td>
+                <td>@student.Name</td>
+                <td>@student.DateOfBirth.ToShortDateString()</td>
+                <td>@student.Email</td>
+                <td>
+                    <a asp-controller="StudentRecords" asp-action="Details" asp-route-id="@student.RollNo">Details</a> |
+                    <a asp-controller="StudentRecords" asp-action="CreateUpdate" asp-route-id="@student.RollNo">Edit</a> |
+                    <a asp-controller="StudentRecords" asp-action="Delete" asp-route-id="@student.RollNo">Delete</a>
+                </td>
+            </tr>
+            count++;
+        }
+    </tbody>
+</table>
+<a asp-controller="StudentRecords" asp-action="CreateUpdate">Create New</a>
+

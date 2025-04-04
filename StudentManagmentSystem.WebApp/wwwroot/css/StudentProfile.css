@@ -1,0 +1,102 @@
+﻿
+
+body {
+    background-color: #f5f5dc; /* Beige background */
+    color: #5a3e1b; /* Dark brown text */
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    background: #fffaf0;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+    overflow-x: auto; /* Ensures horizontal scrolling when needed */
+}
+
+h2 {
+    color: #4b2e15;
+    text-align: center;
+}
+
+
+.table-container {
+    width: 100%;
+    overflow-x: auto; 
+    display: block; 
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fdf6e3;
+    min-width: 100%; 
+    white-space: nowrap; 
+}
+
+thead {
+    background: #8b5e3c;
+    color: white;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+tbody tr:hover {
+    background-color: #f0e0c0;
+}
+
+
+.btn-primary {
+    background-color: #8b5e3c;
+    border: none;
+    padding: 10px 15px;
+    margin: 5px;
+}
+
+    .btn-primary:hover {
+        background-color: #6b4025;
+    }
+
+.btn-secondary {
+    background-color: #d2b48c;
+    border: none;
+}
+
+.btn-danger {
+    background-color: #a52a2a;
+}
+
+
+.modal-content {
+    background: #fffaf0;
+    border-radius: 8px;
+}
+
+
+.form-group label {
+    font-weight: bold;
+    color: #5a3e1b;
+}
+
+.form-control {
+    border: 1px solid #8b5e3c;
+}
+
+
+@media (max-width: 768px) {
+    .table-container {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .button-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}

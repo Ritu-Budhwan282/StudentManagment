@@ -1,0 +1,97 @@
+﻿body {
+    font-family: 'Poppins', sans-serif;
+    background: url('https://source.unsplash.com/1600x900/?education,library,students') no-repeat center center/cover;
+    color: #3d2a1a;
+
+    
+    
+}
+
+.container {
+    width: 90%;
+    max-width: 1000px;
+    text-align: center;
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 12px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.hero {
+    background: linear-gradient(135deg, #d2b48c, #b08b5e);
+    padding: 40px;
+    border-radius: 12px;
+    color: #2b1d0e;
+}
+
+    .hero h1 {
+        font-size: 2.5em;
+        margin-bottom: 8px;
+    }
+
+    .hero p {
+        font-size: 1.1em;
+    }
+
+.features {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.feature-box {
+    background: #c8a87d;
+    padding: 15px;
+    border-radius: 8px;
+    width: 40%;
+    min-width: 260px;
+    flex: 1;
+    margin: 8px;
+    box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.12);
+    transition: transform 0.3s;
+    color: #2b1d0e;
+}
+
+    .feature-box:hover {
+        transform: translateY(-4px);
+    }
+
+.cta {
+    margin-top: 30px;
+}
+
+    .cta button {
+        background: #3d2a1a;
+        color: white;
+        padding: 12px 30px;
+        border: none;
+        font-size: 1.1em;
+        cursor: pointer;
+        border-radius: 6px;
+        transition: background 0.3s, transform 0.2s;
+    }
+
+        .cta button:hover {
+            background: #2b1d0e;
+            transform: scale(1.04);
+        }
+
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 2em;
+    }
+
+    .hero p {
+        font-size: 1em;
+    }
+
+    .features {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .feature-box {
+        width: 85%;
+    }
+}

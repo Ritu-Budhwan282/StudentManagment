@@ -1,0 +1,21 @@
+﻿@model StudentManagmentSystem.WebApp.Models.StudentRecordModel;
+
+<h2>Enter Student Details</h2>
+<form asp-action="CreateUpdateRecord" > 
+    <input type="hidden" asp-for="@Model.RollNo"/>
+
+    <div class="form-group">
+        <label >Name</label>
+        <input asp-for="@Model.Name" class="form-control" value="@Model.Name" required />
+    </div>
+    <div class="form-group">
+        <label >DOB</label>
+        <input asp-for="@Model.DateOfBirth" value="@Model.DateOfBirth" class="form-control" type="date" min="2000-01-01" required/>
+    </div>
+    <div class="form-group">
+        <label >Email</label>
+        <input asp-for="@Model.Email" value ="@Model.Email" class="form-control" type="email" required/>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+<a asp-action="Index">Back to List</a>

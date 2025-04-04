@@ -1,0 +1,182 @@
+﻿
+<link rel="stylesheet" href="~/css/Department.css" asp-append-version="true" />
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody id="department-list"></tbody>
+</table>
+<a  id="addDepartmentLink" class="btn btn-success mt-3">Add Department</a>
+<div id="add-department-form-container"></div>
+<div id="DepartmentInfo"></div>
+<div id="department-details-container" class="d-none">
+    <form  id="department-data">
+        <input id="department-id" type="hidden" name="Id" value="" />
+        <label>Department Name: </label>
+        <input id="department-name" name="Name" type="text" value="" />
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+
+
+
+<div class="modal fade" id="deleteConfirmationModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Confirm Deletion</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p id="deleteMessage"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" id="confirmDeleteBtn" class="btn btn-danger">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script>
+        var deleteModal = new bootstrap.Modal($('#deleteConfirmationModal'));
+        var departmentId;
+        $(document).ready(function () {
+            loadDepartments();
+        })
+        function loadDepartments() {
+            $.ajax({
+                method: 'GET',
+                url: '/Department/GetDepartments',
+                success: function (response) {
+                    $('#department-list').html('');
+                    $.each(response, function (index, item) {
+                        $('#department-list').append(renderDepartmentRow(index+1,item));
+                    });
+                }
+            });
+        }
+        function renderDepartmentRow(index,department) {
+            var html =`<tr id="row_${department.id}">
+            <td>${index}</td>
+            <td>${department.name}</td>
+            <td>
+            <a class="btn btn-info btn-sm" onclick="getDepartmentDetails(`+department.id+`)">Info</a>
+            <a onclick="confirmEditDepartment(${department.id})" class="btn btn-warning btn-sm">Edit</a>
+            <button type="button" onclick="confirmDeleteDepartment(${department.id}, '${department.name}')"
+            class="btn btn-danger btn-sm"
+            data-bs-toggle="modal"
+            data-bs-target="#deleteConfirmationModal">
+            Delete
+            </button>
+            </td>
+            </tr>`;
+            return html;
+        }
+        function confirmDeleteDepartment(id, name) {
+            departmentId = id;
+            $('#deleteMessage').html('Are you sure you want to delete the department "<strong>' + name + '</strong>"?');
+            deleteModal.show();
+        }
+        
+        $('#confirmDeleteBtn').on('click', function () {
+            if (departmentId) {
+                deleteDepartment(departmentId);
+            }
+        });
+
+        function deleteDepartment() {
+        $.ajax({
+            method: 'POST',
+            url: '/Department/Delete',
+            data: { id: departmentId },
+            success: function (response) {
+                deleteModal.hide();
+                loadDepartments();
+            },
+            error: function (error) {
+                alert("Error deleting department: " + error.responseText);
+            }
+        });
+        }
+        function getDepartmentDetails(id) {
+            console.log("Display");
+            $.ajax({
+                method: 'GET',
+                url: '/Department/Info',
+                data: { id: id },
+                success: function (response) {
+                    
+                            var detailsHtml = `
+                            <div id="department-info-${response.id}" class="alert alert-info mt-3">
+                            <p><strong>ID:</strong> ${response.id}</p>
+                            <p><strong>Name:</strong> ${response.name}</p>
+                            <button class="btn btn-secondary btn-sm" onclick="hideDepartmentDetails(${response.id})">Close</button>
+                        </div>
+                    `;
+                    $('#DepartmentInfo').html(detailsHtml);
+                },
+                error: function (error) {
+                    alert("Error fetching department details: " + error.responseText);
+                }
+            });
+        }
+        function hideDepartmentDetails(id) {
+            $("#department-info-" + id).remove();
+        }
+
+        $('#addDepartmentLink').on('click', function (e) {
+            e.preventDefault();
+            if ($('#department-details-container').hasClass('d-none')) {
+                $('#department-details-container').removeClass('d-none');
+            } 
+            else {
+                $('#department-details-container').addClass('d-none');
+            }
+        });
+        
+        function confirmEditDepartment(id){
+            $.ajax({
+                method: 'GET',
+                url: '/Department/AddUpdate',
+                data:{id: id},
+                success: function (response) {
+                    $('#department-id').val(response.id);
+                    $('#department-name').val(response.name);
+              
+              
+                    $('#department-details-container').removeClass('d-none');
+                }
+            });
+        }
+        $('#department-data').on('submit', function(e){
+            e.preventDefault();
+            var formData = $(this).serialize();
+            console.log(formData);
+            $.ajax({
+                method: 'POST',
+                url: 'Department/AddUpdateDepartment',
+                data: formData,
+                success: function (response) {
+                    if ($('#department-details-container').hasClass('d-none')) {
+                        $('#department-details-container').removeClass('d-none');
+                    }
+                    else {
+                        $('#department-details-container').addClass('d-none');
+                    }
+                    loadDepartments()
+                    $('#department-id').val("");
+                    $('#department-name').val("");
+                },
+                error: function (error) {
+                    alert(error);
+                }
+            })
+        })
+                        
+</script>
+}
